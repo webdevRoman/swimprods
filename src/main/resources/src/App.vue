@@ -28,8 +28,8 @@ export default {
 </script>
 
 <style lang="stylus">
-@import '../assets/styles/vars'
-@import '../assets/styles/reset'
+@import './styles/vars'
+@import './styles/reset'
 
 html, button
   font-family: $font
