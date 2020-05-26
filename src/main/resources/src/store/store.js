@@ -1,18 +1,34 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    count: 0
+    products: []
   },
-  mutations: {
-    increment(state) {
-      state.count++
+  actions: {
+    PRODUCE_PRODUCT({ commit }) {
+      return new Promise((resolve, reject) => {
+        axios({ url: '/manufacturer', data: { message: "Hello world!" }, method: 'POST' })
+          .then(resp => {
+            console.log(resp.data)
+            // commit('ADD_FAVOURITE', data.dish)
+            resolve()
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
     }
   },
+  mutations: {
+    // produceProduct(state) {
+    //   state.count++
+    // }
+  },
   getters: {
-    count: (state) => state.count
+    products: (state) => state.products
   }
 })

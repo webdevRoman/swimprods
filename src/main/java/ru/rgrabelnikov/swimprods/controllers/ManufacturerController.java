@@ -1,14 +1,14 @@
 package ru.rgrabelnikov.swimprods.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.rgrabelnikov.swimprods.service.Products.SwimmingProduct;
 
 @RestController
 @RequestMapping("manufacturer")
 public class ManufacturerController {
-  @GetMapping
-  public String showInfo() {
-    return "Hello World!";
+  @PostMapping
+  public String create(@RequestBody String message) {
+    System.out.println(message);
+    return "Hello world back!";
   }
 }

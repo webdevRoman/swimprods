@@ -2,7 +2,7 @@
 .manufacturer
   .title Производитель
   Loader(title="Производим товар...", v-if="isProducing")
-  button.btn(:disabled="isProducing") Произвести товар
+  button.btn(:disabled="isProducing", @click.prevent="produceProduct") Произвести товар
 </template>
 
 <script>
@@ -18,6 +18,12 @@ export default {
       isProducing: false
     }
   },
+  methods: {
+    produceProduct() {
+      this.$store.dispatch('PRODUCE_PRODUCT')
+      // .then(() => console.log('finished producing'))
+    }
+  }
   // computed: {
   //   count() {
   //     return this.$store.getters.count
