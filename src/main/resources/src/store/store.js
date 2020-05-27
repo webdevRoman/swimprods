@@ -11,7 +11,7 @@ export default new Vuex.Store({
   actions: {
     PRODUCE_PRODUCT({ commit }) {
       return new Promise((resolve, reject) => {
-        axios({ url: '/manufacturer', data: { message: "Hello world!" }, method: 'POST' })
+        axios({ url: '/manufacturer', method: 'POST' })
           .then(resp => {
             console.log(resp.data)
             // commit('ADD_FAVOURITE', data.dish)

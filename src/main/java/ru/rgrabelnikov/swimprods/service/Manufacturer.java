@@ -1,5 +1,6 @@
 package ru.rgrabelnikov.swimprods.service;
 
+import org.springframework.stereotype.Service;
 import ru.rgrabelnikov.swimprods.service.Decorator.HandsDecorator2;
 import ru.rgrabelnikov.swimprods.service.Decorator.HandsDecorator3;
 import ru.rgrabelnikov.swimprods.service.Decorator.LegsDecorator2;
@@ -10,33 +11,40 @@ import ru.rgrabelnikov.swimprods.service.Products.*;
 
 import static java.lang.Thread.sleep;
 
+@Service
 public class Manufacturer implements Runnable {
   private int producedProductsNumber;
   private Warehouse warehouse;
+  private boolean isProducing;
 
   public Manufacturer(Warehouse warehouse) {
     this.producedProductsNumber = 0;
     this.warehouse = warehouse;
+    this.isProducing = false;
+  }
+
+  public void produce() {
+    this.isProducing = true;
   }
 
   @Override
   public void run() {
     try {
-//      while (this.producedProductsNumber < this.productsNumber) {
-        if (this.warehouse.hasSpace()) {
+      while (true)
+        if (isProducing && this.warehouse.hasSpace()) {
           sleep(500);
           SwimmingProduct product = this.produceProduct();
           this.warehouse.add(product);
           System.out.println("[Произведен продукт: " + product.getName() + " (" + product.getManufacturer() + ")]");
           this.producedProductsNumber++;
+          this.isProducing = false;
         }
-//      }
     } catch (InterruptedException ex) {
       System.out.println("Manufacturer thread was interrupted:");
       System.out.println(ex.getMessage());
     }
   }
-//  Абстрактная фабрика используется при производстве лопаток (case 4) и ласт (case 6)
+  //  Абстрактная фабрика используется при производстве лопаток (case 4) и ласт (case 6)
   private SwimmingProduct produceProduct() {
     int productType = ProductsData.RAND.nextInt(7);
     SwimmingProduct product;

@@ -1,17 +1,19 @@
 package ru.rgrabelnikov.swimprods.service;
 
+import org.springframework.stereotype.Service;
 import ru.rgrabelnikov.swimprods.service.Products.SwimmingProduct;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Service
 public class Warehouse {
   private int maxProductsNumber;
   private AtomicInteger productsNumber;
   private ArrayList<SwimmingProduct> products;
 
-  public Warehouse(int maxProductsNumber) {
-    this.maxProductsNumber = maxProductsNumber;
+  public Warehouse() {
+    this.maxProductsNumber = 10;
     this.productsNumber = new AtomicInteger(0);
     this.products = new ArrayList<SwimmingProduct>();
   }
