@@ -13,15 +13,20 @@ import static java.lang.Thread.sleep;
 
 @Service
 public class Manufacturer implements Runnable {
+  private boolean isStarted;
   private int producedProductsNumber;
   private Warehouse warehouse;
   private boolean isProducing;
 
   public Manufacturer(Warehouse warehouse) {
+    this.isStarted = false;
     this.producedProductsNumber = 0;
     this.warehouse = warehouse;
     this.isProducing = false;
   }
+
+  public boolean isStarted() { return isStarted; }
+  public void setStarted(boolean started) {isStarted = started; }
 
   public void produce() {
     this.isProducing = true;
@@ -30,12 +35,15 @@ public class Manufacturer implements Runnable {
   @Override
   public void run() {
     try {
+      this.isStarted = true;
       while (true)
         if (isProducing && this.warehouse.hasSpace()) {
           sleep(500);
           SwimmingProduct product = this.produceProduct();
           this.warehouse.add(product);
+          this.warehouse.setNewProduct(product);
           System.out.println("[Произведен продукт: " + product.getName() + " (" + product.getManufacturer() + ")]");
+//          System.out.println(product.getPrice());
           this.producedProductsNumber++;
           this.isProducing = false;
         }

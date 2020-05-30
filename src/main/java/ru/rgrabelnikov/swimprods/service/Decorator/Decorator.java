@@ -18,4 +18,6 @@ public class Decorator extends SwimmingProduct {
   }
   @Override
   public String getManufacturer() { return this.swimmingProduct.getManufacturer(); }
+  @Override
+  public int getPrice() { return this.swimmingProduct.getPrice(); }
 }

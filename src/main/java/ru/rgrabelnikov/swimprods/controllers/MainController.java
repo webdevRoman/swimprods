@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.rgrabelnikov.swimprods.service.Customer;
 import ru.rgrabelnikov.swimprods.service.Manufacturer;
-import ru.rgrabelnikov.swimprods.service.Warehouse;
 
 @Controller
 @RequestMapping("/")
@@ -25,10 +24,14 @@ public class MainController {
   public String main(Model model) {
     model.addAttribute("isDevMode", "dev".equals(profile));
 
-    Thread manufacturerThread = new Thread(manufacturer);
-    Thread customerThread = new Thread(customer);
-    manufacturerThread.start();
-    customerThread.start();
+    if (!manufacturer.isStarted()) {
+      Thread manufacturerThread = new Thread(manufacturer);
+      manufacturerThread.start();
+    }
+    if (!customer.isStarted()) {
+      Thread customerThread = new Thread(customer);
+      customerThread.start();
+    }
 
     return "index";
   }

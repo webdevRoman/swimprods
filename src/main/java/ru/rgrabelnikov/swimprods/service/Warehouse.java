@@ -11,9 +11,10 @@ public class Warehouse {
   private int maxProductsNumber;
   private AtomicInteger productsNumber;
   private ArrayList<SwimmingProduct> products;
+  private SwimmingProduct newProduct;
 
   public Warehouse() {
-    this.maxProductsNumber = 10;
+    this.maxProductsNumber = 15;
     this.productsNumber = new AtomicInteger(0);
     this.products = new ArrayList<SwimmingProduct>();
   }
@@ -40,4 +41,10 @@ public class Warehouse {
     else
       return false;
   }
+
+  public SwimmingProduct getNewProduct() { return newProduct; }
+  public void setNewProduct(SwimmingProduct newProduct) { this.newProduct = newProduct; }
+  public void resetNewProduct() { this.newProduct = null; }
+
+  public ArrayList<SwimmingProduct> getProducts() { return products; }
 }

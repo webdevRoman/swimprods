@@ -7,14 +7,19 @@ import static java.lang.Thread.sleep;
 
 @Service
 public class Customer implements Runnable {
+  private boolean isStarted;
   private int consumedProductsNumber;
   private Warehouse warehouse;
   private boolean isConsuming;
 
   public Customer(Warehouse warehouse) {
+    this.isStarted = false;
     this.consumedProductsNumber = 0;
     this.warehouse = warehouse;
   }
+
+  public boolean isStarted() { return isStarted; }
+  public void setStarted(boolean started) {isStarted = started; }
 
   public void consume() {
     this.isConsuming = true;
@@ -23,6 +28,7 @@ public class Customer implements Runnable {
   @Override
   public void run() {
     try {
+      this.isStarted = true;
       while(true)
         if (isConsuming && !this.warehouse.isEmpty()) {
           sleep(1000);

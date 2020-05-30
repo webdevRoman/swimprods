@@ -11,10 +11,4 @@ public class HandsDecorator3 extends Decorator {
   public String train() {
     return super.train() + "(Эффективность тренировки рук повышена в 3 раза)";
   }
-  @Override
-  public String getName() {
-    return this.swimmingProduct.getName();
-  }
-  @Override
-  public String getManufacturer() { return this.swimmingProduct.getManufacturer(); }
 }

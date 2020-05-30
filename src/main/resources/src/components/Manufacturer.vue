@@ -13,21 +13,20 @@ export default {
   components: {
     Loader
   },
-  data() {
-    return {
-      isProducing: false
-    }
-  },
   methods: {
     produceProduct() {
       this.$store.dispatch('PRODUCE_PRODUCT')
-      // .then(() => console.log('finished producing'))
     }
+  },
+  computed: {
+    isProducing() {
+      return this.$store.getters.isProducing
+    }
+  },
+  created() {
+    setInterval(() => {
+      this.$store.dispatch('CHECK_NEW_PRODUCT')
+    }, 1000)
   }
-  // computed: {
-  //   count() {
-  //     return this.$store.getters.count
-  //   }
-  // }
 }
 </script>
