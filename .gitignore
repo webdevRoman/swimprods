@@ -32,4 +32,4 @@ out/
 .vscode/
 
 node_modules
-/src/main/resourses/static/js/
+# /src/main/resourses/static/js/

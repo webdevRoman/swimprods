@@ -29,9 +29,10 @@ export default {
 <style scoped lang="stylus">
 @import './../styles/vars'
 
+.warehouse
+  flex-basis: 40%
 .title
   margin-bottom 15px
-
 .products
   flex-grow 1
   width 90%
@@ -44,7 +45,6 @@ export default {
     font-size 22px
     text-align center
     margin-top 20px
-
 .product
   display flex
   justify-content space-between

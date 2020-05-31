@@ -21,8 +21,10 @@ export default {
     closeNotification() {
       const notification = document.getElementById(this.$attrs.id)
       notification.style.opacity = '0'
-      setTimeout(() => { notification.style.display = 'none' }, 200)
-      this.$store.dispatch('SET_ERROR', '')
+      setTimeout(() => {
+        notification.style.display = 'none'
+        this.$store.dispatch('RESET_NOTIFICATION')
+      }, 200)
     }
   }
 }
@@ -38,7 +40,7 @@ export default {
     right: 20px
     display: none
     opacity: 0
-    width: 400px
+    width: 300px
     padding: 10px 20px
     background-color: $cBgDark
     box-shadow: 0 0 20px rgba(0, 0, 0, .3)
@@ -53,8 +55,8 @@ export default {
       position: absolute
       top: -40px
       right: 0
-      width 30px
-      height 30px
+      width 25px
+      height 25px
       transition: .2s
       &:after, &:before
         position absolute

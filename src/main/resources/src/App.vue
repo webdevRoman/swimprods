@@ -5,7 +5,7 @@
     Manufacturer.main__section
     Warehouse.main__section
     Customer.main__section
-  GrNotification#notification-error(:gr-notification-config="error")
+  GrNotification#notification(v-if="notification !== null", :gr-notification-config="notification")
 </template>
 
 <script>
@@ -23,25 +23,27 @@ export default {
     GrNotification
   },
   computed: {
-    error() {
-      return this.$store.getters.error
+    notification() {
+      return this.$store.getters.notification
     }
   },
   watch: {
-    error: {
-      handler(val) {
-        const notification = document.getElementById('notification-error')
-        if (val.message !== '') {
+    notification(val) {
+      if (val !== null) {
+        setTimeout(() => {
+          const notification = document.getElementById('notification')
           notification.style.display = 'block'
           setTimeout(() => { notification.style.opacity = '1' }, 10)
-          setTimeout(() => {
+          const timeoutId = setTimeout(() => {
             notification.style.opacity = '0'
-            setTimeout(() => { notification.style.display = 'none' }, 200)
-            this.$store.dispatch('SET_ERROR', '')
+            setTimeout(() => {
+              notification.style.display = 'none'
+              this.$store.dispatch('RESET_NOTIFICATION')
+            }, 200)
           }, 5000)
-        }
-      },
-      deep: true
+          this.$store.dispatch('SET_TIMEOUT_ID', timeoutId)
+        }, 5)
+      }
     }
   }
 }
@@ -80,7 +82,6 @@ body
   display: flex
   justify-content: space-between
   &__section
-    flex-basis: 33.333%
     border-right: 5px solid #E8E8E8
     display: flex
     justify-content: space-between
@@ -98,7 +99,7 @@ body
   width: 90%
   padding: 10px
   background-color: $cActive
-  border-radius 10px
+  border-radius: 10px
   color: $cFontLight
   text-transform: uppercase
   transition: .2s

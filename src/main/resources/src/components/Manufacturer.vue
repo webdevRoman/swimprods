@@ -25,8 +25,13 @@ export default {
   },
   created() {
     setInterval(() => {
-      this.$store.dispatch('CHECK_NEW_PRODUCT')
+      this.$store.dispatch('CHECK_PRODUCED_PRODUCT')
     }, 1000)
   }
 }
 </script>
+
+<style scoped lang="stylus">
+.manufacturer
+  flex-basis: 30%
+</style>

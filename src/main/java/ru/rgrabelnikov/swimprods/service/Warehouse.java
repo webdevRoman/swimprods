@@ -11,7 +11,8 @@ public class Warehouse {
   private int maxProductsNumber;
   private AtomicInteger productsNumber;
   private ArrayList<SwimmingProduct> products;
-  private SwimmingProduct newProduct;
+  private SwimmingProduct producedProduct;
+  private SwimmingProduct consumedProduct;
 
   public Warehouse() {
     this.maxProductsNumber = 15;
@@ -42,9 +43,13 @@ public class Warehouse {
       return false;
   }
 
-  public SwimmingProduct getNewProduct() { return newProduct; }
-  public void setNewProduct(SwimmingProduct newProduct) { this.newProduct = newProduct; }
-  public void resetNewProduct() { this.newProduct = null; }
+  public SwimmingProduct getProducedProduct() { return producedProduct; }
+  public void setProducedProduct(SwimmingProduct producedProduct) { this.producedProduct = producedProduct; }
+  public void resetProducedProduct() { this.producedProduct = null; }
+
+  public SwimmingProduct getConsumedProduct() { return consumedProduct; }
+  public void setConsumedProduct(SwimmingProduct consumedProduct) { this.consumedProduct = consumedProduct; }
+  public void resetConsumedProduct() { this.consumedProduct = null; }
 
   public ArrayList<SwimmingProduct> getProducts() { return products; }
 }

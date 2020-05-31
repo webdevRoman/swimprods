@@ -19,10 +19,17 @@ public class WarehouseController {
   public ArrayList<SwimmingProduct> sendProducts() {
     return this.warehouse.getProducts();
   }
-  @GetMapping("/new")
+
+  @GetMapping("/produced")
   public SwimmingProduct checkNewProduct() {
-    SwimmingProduct newProduct = this.warehouse.getNewProduct();
-    this.warehouse.resetNewProduct();
-    return newProduct;
+    SwimmingProduct producedProduct = this.warehouse.getProducedProduct();
+    this.warehouse.resetProducedProduct();
+    return producedProduct;
+  }
+  @GetMapping("/consumed")
+  public SwimmingProduct checkConsumedProduct() {
+    SwimmingProduct consumedProduct = this.warehouse.getConsumedProduct();
+    this.warehouse.resetConsumedProduct();
+    return consumedProduct;
   }
 }

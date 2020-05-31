@@ -26,7 +26,6 @@ public class Manufacturer implements Runnable {
   }
 
   public boolean isStarted() { return isStarted; }
-  public void setStarted(boolean started) {isStarted = started; }
 
   public void produce() {
     this.isProducing = true;
@@ -41,9 +40,8 @@ public class Manufacturer implements Runnable {
           sleep(500);
           SwimmingProduct product = this.produceProduct();
           this.warehouse.add(product);
-          this.warehouse.setNewProduct(product);
-          System.out.println("[Произведен продукт: " + product.getName() + " (" + product.getManufacturer() + ")]");
-//          System.out.println(product.getPrice());
+          this.warehouse.setProducedProduct(product);
+//          System.out.println("[Произведен продукт: " + product.getName() + " (" + product.getManufacturer() + ")]");
           this.producedProductsNumber++;
           this.isProducing = false;
         }
