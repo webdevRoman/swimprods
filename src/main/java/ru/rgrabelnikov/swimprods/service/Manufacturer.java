@@ -100,7 +100,7 @@ public class Manufacturer implements Runnable {
         }
         break;
       default:
-        product = new SwimmingProduct("Продукт для занятий плаванием", prodPrice, prodColors, prodManufacturer);
+        product = new SwimmingProduct("Продукт для занятий плаванием", prodPrice, prodManufacturer);
         break;
     }
     return product;

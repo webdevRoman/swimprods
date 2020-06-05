@@ -8,6 +8,7 @@ import ru.rgrabelnikov.swimprods.service.Products.SwimmingProduct;
 import ru.rgrabelnikov.swimprods.service.Warehouse;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("warehouse")
@@ -16,7 +17,7 @@ public class WarehouseController {
   private Warehouse warehouse;
 
   @GetMapping()
-  public ArrayList<SwimmingProduct> sendProducts() {
+  public List<SwimmingProduct> sendProducts() {
     return this.warehouse.getProducts();
   }
 

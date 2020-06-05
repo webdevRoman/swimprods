@@ -1,31 +1,36 @@
 package ru.rgrabelnikov.swimprods.service;
 
 import org.springframework.stereotype.Service;
+import ru.rgrabelnikov.swimprods.repo.SwimmingProductRepo;
 import ru.rgrabelnikov.swimprods.service.Products.SwimmingProduct;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class Warehouse {
   private int maxProductsNumber;
   private AtomicInteger productsNumber;
-  private ArrayList<SwimmingProduct> products;
+  private List<SwimmingProduct> products;
   private SwimmingProduct producedProduct;
   private SwimmingProduct consumedProduct;
 
-  public Warehouse() {
+  private final SwimmingProductRepo swimmingProductRepo;
+
+  public Warehouse(SwimmingProductRepo swimmingProductRepo) {
+    this.swimmingProductRepo = swimmingProductRepo;
     this.maxProductsNumber = 15;
     this.productsNumber = new AtomicInteger(0);
-    this.products = new ArrayList<SwimmingProduct>();
   }
 
   public void add(SwimmingProduct product) {
     this.products.add(product);
+    swimmingProductRepo.save(new SwimmingProduct(product.getName(), product.getPrice(), product.getManufacturer()));
     this.productsNumber.getAndIncrement();
   }
   public SwimmingProduct remove() {
     SwimmingProduct product = this.products.remove(0);
+    swimmingProductRepo.deleteById(product.getId());
     this.productsNumber.getAndDecrement();
     return product;
   }
@@ -51,5 +56,9 @@ public class Warehouse {
   public void setConsumedProduct(SwimmingProduct consumedProduct) { this.consumedProduct = consumedProduct; }
   public void resetConsumedProduct() { this.consumedProduct = null; }
 
-  public ArrayList<SwimmingProduct> getProducts() { return products; }
+  public void setProducts(List<SwimmingProduct> products) {
+    this.products = products;
+    this.productsNumber.set(products.size());
+  }
+  public List<SwimmingProduct> getProducts() { return products; }
 }

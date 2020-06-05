@@ -14,10 +14,24 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.postgresql:postgresql'
+    implementation 'org.projectlombok:lombok'
+    implementation 'javax.xml.bind:jaxb-api'
+//    implementation 'com.sun.xml.bind:jaxb-core'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '3.0.0-M4'
+//    implementation 'com.sun.xml.bind:jaxb-impl'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '3.0.0-M4'
+//    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+//    compile('org.postgresql:postgresql')
+//    compile('org.projectlombok:lombok')
+//    compile('javax.xml.bind:jaxb-api')
+//    compile('com.sun.xml.bind:jaxb-core')
+//    compile('com.sun.xml.bind:jaxb-impl')
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 }
 
 test {
